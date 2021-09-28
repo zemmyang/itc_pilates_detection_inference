@@ -1,0 +1,10 @@
+opencv-python
+pandas
+tensorflow 
+tqdm
+numpy
+flask
+flask_assets
+werkzeug
+gdown
+zipfile
