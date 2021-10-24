@@ -1,6 +1,6 @@
 from typing import List
 import numpy as np
-import cv2
+from cv2 import VideoCapture, CAP_PROP_POS_MSEC, CAP_PROP_FPS, waitKey, destroyAllWindows
 import io
 from PIL import Image
 import base64
@@ -22,18 +22,18 @@ class FrameDisplay:
 # ------------------- internal functions ------------------- #
 
     def _open_and_read_video(self):
-        self._video_capture = cv2.VideoCapture(self._video)
+        self._video_capture = VideoCapture(self._video)
         self._generate_frames()
         self._close_video()
 
     def _generate_frames(self):
         _frames_to_generate = CONST.SHOW_FRAMES
         _frames_delay = CONST.SHOW_FRAMES_SKIP
-        _fps = int(self._video_capture.get(cv2.CAP_PROP_FPS))
+        _fps = int(self._video_capture.get(CAP_PROP_FPS))
 
         _count = 0
         while self._video_capture.isOpened():
-            self._video_capture.set(cv2.CAP_PROP_POS_MSEC, self._start_millisec)
+            self._video_capture.set(CAP_PROP_POS_MSEC, self._start_millisec)
             _, _frame = self._video_capture.read()
 
             if _count == 0:
@@ -45,14 +45,14 @@ class FrameDisplay:
             _count += 1
 
             # Check end of video
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            if waitKey(1) & 0xFF == ord('q'):
                 break
             elif len(self._image_list) == _frames_to_generate:
                 break
 
     def _close_video(self):
         self._video_capture.release()
-        cv2.destroyAllWindows()
+        destroyAllWindows()
 
 # ------------------- external functions ------------------- #
 

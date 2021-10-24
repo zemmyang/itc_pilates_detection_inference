@@ -17,8 +17,6 @@ FLASK_PORT = 7070
 
 
 
-GDRIVE_DIRECTORY = 'gdrive_links.json'
-
 MODEL_WEIGHTS = '21oct.h5'
 MODELS_DIRECTORY = 'model_weights'
 
