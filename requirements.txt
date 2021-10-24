@@ -6,5 +6,4 @@ numpy
 flask
 flask_assets
 werkzeug
-gdown
-zipfile
+
