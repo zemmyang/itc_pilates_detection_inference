@@ -1,0 +1,9 @@
+{% extends "blank.html" %}
+{% block content %}
+
+{% for image in frame_display %}
+    {{ image | safe }}
+{% endfor %}
+
+
+{% endblock %}

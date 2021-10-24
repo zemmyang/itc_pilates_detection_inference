@@ -1,0 +1,14 @@
+<hr />
+
+<h3>
+Or by linking a YouTube clip:
+</h3>
+
+<form action = "http://localhost:5000/youtube" method = "POST" enctype = "multipart/form-data">
+  <div class="form-group">
+    <input type="text" name='yt_video_file' class="form-control-file" id="fileInput">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+<p>Max file size: {{ max_file_size }}</p>
