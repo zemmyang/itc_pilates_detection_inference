@@ -33,3 +33,4 @@ SHOW_FRAMES_SKIP = 1  # in sec
 FRAMES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), FRAMES_FOLDER)
 VIDEO_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), DATA_UPLOAD_FOLDER)
 MODELS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), MODELS_DIRECTORY)
+

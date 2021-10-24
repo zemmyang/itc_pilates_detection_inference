@@ -6,7 +6,6 @@ import os
 from Control.FrameExtract import extract_frames
 from Control.FrameDisplay import FrameDisplay
 from Model.RunPrediction import predict
-from Model import SettingsAndPaths as CONF
 from Model.VGGModelSetUp import model_reconstruct
 
 
@@ -14,7 +13,7 @@ app = Flask(__name__,
             template_folder=CONST.TEMPLATE_FOLDER,
             static_folder=CONST.STATIC_FOLDER)
 
-model = model_reconstruct(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
+model = model_reconstruct()
 
 
 @app.route('/')
