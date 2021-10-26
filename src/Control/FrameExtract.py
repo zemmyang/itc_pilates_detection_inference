@@ -10,10 +10,6 @@ def extract_frames(video_path, frames_path):
     :return:
     """
 
-    # indexes 0 and 1, for the list
-    NAME = 0
-    TAG = 1
-
     # Frame rate
     FRAMES = 20
     # Max attempts before it will give up?
@@ -21,8 +17,6 @@ def extract_frames(video_path, frames_path):
 
     # storing the frames from training videos
     counter_videos = 0
-    frame_videos_list = []
-    # for video in tqdm(df.itertuples(index=False)):
 
     counter_frames = 0
     counter_attempts = 0

@@ -1,9 +1,35 @@
 {% extends "blank.html" %}
 {% block content %}
 
-{% for image in frame_display %}
-    {{ image | safe }}
-{% endfor %}
+<div class="text-center mt-5">
+    <h1>Predict says: {{ results }}</h1>
+</div>
 
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+        <h2> Sample frame(s): </h2>
+        <p> If there are any misclassified frames, you'd see them here </p>
+
+        {% for image in frame_display %}
+            {{ image | safe }}
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <form action="/clear" method="post">
+      <button type="submit" class="btn btn-primary" name="start_over">Start over?</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

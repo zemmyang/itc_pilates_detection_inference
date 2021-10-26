@@ -15,9 +15,6 @@ def predict(model):
 
     frames_path = [Path(file) for file in glob(f"{CONST.FRAMES_PATH}/*.jpg")]
 
-    # creating two lists to store predicted and actual tags
-    predict = []
-
     prediction_images = []
     for k, frame in enumerate(frames_path):
         img = image.load_img(frame, target_size=(224, 224, 3))
@@ -28,7 +25,4 @@ def predict(model):
     prediction_images = preprocess_input(np.array(prediction_images))
     prediction = np.argmax(model.predict(prediction_images), axis=-1)
 
-    # appending the mode of predictions in predict list to assign the tag to the video
-    predict.append(pred_df.columns.values[stats.mode(prediction)[ONLY][ONLY]])
-
-    return predict
+    return pred_df.columns.values[stats.mode(prediction)[ONLY][ONLY]], pred_df.columns.values[prediction]
