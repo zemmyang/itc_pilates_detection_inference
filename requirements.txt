@@ -1,6 +1,6 @@
 opencv-python
 pandas
-tensorflow 
+tensorflow-cpu
 tqdm
 numpy
 flask
