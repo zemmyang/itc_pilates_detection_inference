@@ -5,7 +5,7 @@ import os
 from Control.FrameExtract import extract_frames
 from Control.DeleteInputData import clear_input_data
 from Model.RunPrediction import predict
-from Model.GetUniqueFrames import get_unique_frames
+from Model.GetUniqueFrames import get_unique_frames, show_all_frames
 from Model import SettingsAndPaths as CONST
 
 
@@ -47,7 +47,8 @@ def show_uploaded_file(model):
         # fd = FrameDisplay(video_path, output_type="CV")
         display = res.replace("_", " ").capitalize()
 
-        unique_frames = get_unique_frames(per_frame_predictions)
+        # frames = get_unique_frames(per_frame_predictions)
+        frames = show_all_frames(per_frame_predictions)
 
         # output the analysis template
-        return render_template("analysis.html", results=display, frame_display=unique_frames)
+        return render_template("analysis.html", results=display, frame_display=frames)

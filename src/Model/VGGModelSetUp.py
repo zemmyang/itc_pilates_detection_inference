@@ -1,22 +1,25 @@
 from tensorflow.keras.models import load_model
-import requests
+import zipfile
 import os
+from pathlib import Path
+from glob import glob
 from Model import SettingsAndPaths as CONF
 
 
-def download_h5():
-    path_to_h5 = "https://github.com/zemmyang/itc_pilates_detection_inference/raw/master/src/Model/model_weights/21oct.h5"
-    r = requests.get(path_to_h5)
-    with open(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS), 'wb') as f:
-        f.write(r.content)
-    print("Downloaded h5 file")
-
-
 def model_reconstruct():
-    if not os.path.isfile(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS)):
-        print("h5 file not found, downloading")
-        download_h5()
+    if os.path.isfile(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS)):
+        print("Loading model...")
+    else:
+        print("Model not found, unzipping from archives...")
+        zip_list = [Path(i) for i in glob(f'{CONF.MODELS_PATH}/21oct.zip.*')]
 
-    print("Loading model...")
+        for zipName in zip_list:
+            with open(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "ab") as f:
+                with open(os.path.join(CONF.MODELS_PATH, zipName), "rb") as z:
+                    f.write(z.read())
+
+        with zipfile.ZipFile(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "r") as zipObj:
+            zipObj.extractall(CONF.MODELS_PATH)
+
     model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
     return model

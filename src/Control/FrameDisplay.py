@@ -44,7 +44,7 @@ class FrameDisplay:
 
         return """
                 <figure class="figure">
-                    <img src="data:image/png;base64,{image}" class="img-thumbnail w-50 /">
+                    <img src="data:image/png;base64,{image}" class="img-fluid img-thumbnail h-200 /">
                         <figcaption class="figure-caption">Prediction: {caption}</figcaption>
                 </figure>
                 """.format(image=data, caption=caption.replace("_", " ").capitalize())

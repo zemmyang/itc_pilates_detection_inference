@@ -7,18 +7,7 @@
 
 <hr />
 
-<div class="container">
-  <div class="row">
-    <div class="col text-center">
-        <h2> Sample frame(s): </h2>
-        <p> If there are any misclassified frames, you'd see them here </p>
-
-        {% for image in frame_display %}
-            {{ image | safe }}
-        {% endfor %}
-    </div>
-  </div>
-</div>
+{% include 'gallery.html' %}
 
 <hr />
 

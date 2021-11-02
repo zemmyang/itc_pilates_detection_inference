@@ -19,3 +19,13 @@ def get_unique_frames(lst):
         fd.add_image(_frames[v], caption=k)
 
     return fd
+
+
+def show_all_frames(lst):
+    _frames = [Path(file) for file in glob(f"{CONST.FRAMES_PATH}/*.jpg")]
+
+    fd = FrameDisplay()
+    for k, v, in enumerate(_frames):
+        fd.add_image(v, caption=f"{lst[k]} (frame {1+k})")
+
+    return fd
