@@ -6,6 +6,5 @@ numpy
 flask
 flask_assets
 werkzeug
-gunicorn
 scipy
 Pillow
