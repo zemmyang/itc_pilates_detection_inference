@@ -21,5 +21,8 @@ def model_reconstruct():
         with zipfile.ZipFile(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "r") as zipObj:
             zipObj.extractall(CONF.MODELS_PATH)
 
+        [os.remove(file)for file in zip_list]
+        os.remove(os.path.join(CONF.MODELS_PATH, "21oct.zip"))
+
     model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
     return model
