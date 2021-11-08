@@ -4,5 +4,4 @@ tensorflow-cpu
 numpy
 flask
 werkzeug
-scipy
 Pillow

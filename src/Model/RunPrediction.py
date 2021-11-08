@@ -1,7 +1,7 @@
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
-from scipy import stats
+# from scipy import stats
 import pandas as pd
 from glob import glob
 from pathlib import Path
@@ -25,4 +25,9 @@ def predict(model):
     prediction_images = preprocess_input(np.array(prediction_images))
     prediction = np.argmax(model.predict(prediction_images), axis=-1)
 
-    return pred_df.columns.values[stats.mode(prediction)[ONLY][ONLY]], pred_df.columns.values[prediction]
+    # return pred_df.columns.values[stats.mode(prediction)[ONLY][ONLY]], pred_df.columns.values[prediction]
+    return pred_df.columns.values[no_scipy_mode(prediction)], pred_df.columns.values[prediction]
+
+
+def no_scipy_mode(arr):
+    return np.apply_along_axis(lambda x: np.bincount(x).argmax(), axis=0, arr=arr)
