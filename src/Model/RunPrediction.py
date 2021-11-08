@@ -2,7 +2,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg16 import preprocess_input
 import numpy as np
 # from scipy import stats
-import pandas as pd
+# import pandas as pd
 from glob import glob
 from pathlib import Path
 
@@ -11,7 +11,10 @@ from Model import SettingsAndPaths as CONST
 
 def predict(model):
     # ONLY = 0
-    pred_df = pd.get_dummies(pd.Series(['double_leg', 'rollup', 'criss_cross']))
+    # pred_df = pd.get_dummies(pd.Series(['double_leg', 'rollup', 'criss_cross']))
+    pred_dict = {0: 'criss_cross',
+                 1: 'double_leg',
+                 2: 'rollup'}
 
     frames_path = [Path(file) for file in glob(f"{CONST.FRAMES_PATH}/*.jpg")]
 
@@ -26,7 +29,8 @@ def predict(model):
     prediction = np.argmax(model.predict(prediction_images), axis=-1)
 
     # return pred_df.columns.values[stats.mode(prediction)[ONLY][ONLY]], pred_df.columns.values[prediction]
-    return pred_df.columns.values[no_scipy_mode(prediction)], pred_df.columns.values[prediction]
+    # return pred_df.columns.values[no_scipy_mode(prediction)], pred_df.columns.values[prediction]
+    return pred_dict[int(no_scipy_mode(prediction))], [pred_dict[i] for i in prediction]
 
 
 def no_scipy_mode(arr):
