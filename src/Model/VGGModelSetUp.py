@@ -14,9 +14,9 @@ def model_reconstruct():
         zip_list = [Path(i) for i in glob(f'{CONF.MODELS_PATH}/21oct.h5.zip.*')]
 
         for zipName in zip_list:
-            with open(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "ab") as f:
-                with open(os.path.join(CONF.MODELS_PATH, zipName), "rb") as z:
-                    f.write(z.read())
+            with open(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "ab") as f, \
+                    open(os.path.join(CONF.MODELS_PATH, zipName), "rb") as z:
+                f.write(z.read())
 
         with zipfile.ZipFile(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "r") as zipObj:
             zipObj.extractall(os.path.join(CONF.MODELS_PATH, '21oct.h5'))
