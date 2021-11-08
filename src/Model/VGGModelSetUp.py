@@ -18,6 +18,7 @@ def model_reconstruct():
                     open(os.path.join(CONF.MODELS_PATH, zipName), "rb") as z:
                 f.write(z.read())
 
+        print(f"Model zip: {os.path.isfile(os.path.join(CONF.MODELS_PATH, '21oct.zip'))}")
         with zipfile.ZipFile(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "r") as zipObj:
             zipObj.extractall(os.path.join(CONF.MODELS_PATH, '21oct.h5'))
 
