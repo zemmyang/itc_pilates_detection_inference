@@ -10,7 +10,7 @@ from Model import SettingsAndPaths as CONST
 
 
 def predict(model):
-    ONLY = 0
+    # ONLY = 0
     pred_df = pd.get_dummies(pd.Series(['double_leg', 'rollup', 'criss_cross']))
 
     frames_path = [Path(file) for file in glob(f"{CONST.FRAMES_PATH}/*.jpg")]
