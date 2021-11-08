@@ -1,5 +1,6 @@
 from flask import render_template, request
-from werkzeug.utils import secure_filename
+# from werkzeug.utils import secure_filename
+from pathlib import Path
 import os
 
 from Control.FrameExtract import extract_frames
@@ -35,7 +36,7 @@ def show_uploaded_file(model):
     if request.method == 'POST':
         # put the file somewhere locally
         f = request.files['file']
-        video_path = os.path.join(CONST.VIDEO_FOLDER, secure_filename(f.filename))
+        video_path = os.path.join(CONST.VIDEO_FOLDER, Path(f.filename))
         f.save(video_path)
 
         # split the video into frames
