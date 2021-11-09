@@ -22,5 +22,5 @@ def model_reconstruct():
                 Path(os.path.join(CONF.MODELS_PATH, path)).mkdir(parents=True, exist_ok=True)
                 bucket.download_file(obj.key, os.path.join(CONF.MODELS_PATH, path, filename))
 
-    model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
+    model = load_model(os.path.join(CONF.MODELS_PATH))
     return model
