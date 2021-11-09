@@ -1,5 +1,6 @@
 from tensorflow.keras.models import load_model
 import os
+from pathlib import Path
 import boto3
 from Model import SettingsAndPaths as CONF
 
@@ -15,8 +16,10 @@ def model_reconstruct():
         bucket = s3r.Bucket(os.environ['S3_BUCKET_NAME'])
 
         for obj in bucket.objects.all():
-            if not os.path.exists(os.path.dirname(obj.key)):
-                os.makedirs(os.path.dirname(obj.key))
+            try:
+                Path(os.path.dirname(obj.key)).mkdir(parents=True, exist_ok=True)
+            except FileExistsError:
+                pass
             bucket.download_file(obj.key, os.path.join(CONF.MODELS_PATH, obj.key))
 
     model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
