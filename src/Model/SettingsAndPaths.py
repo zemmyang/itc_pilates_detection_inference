@@ -24,5 +24,5 @@ FRAMES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), FRAMES_F
 VIDEO_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), DATA_UPLOAD_FOLDER)
 OUT_FRAMES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), OUT_FOLDER)
 
-MODELS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), MODELS_DIRECTORY)
+MODELS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), MODELS_DIRECTORY, MODEL_WEIGHTS)
 
