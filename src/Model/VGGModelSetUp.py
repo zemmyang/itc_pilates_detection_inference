@@ -16,11 +16,11 @@ def model_reconstruct():
         bucket = s3r.Bucket(os.environ['S3_BUCKET_NAME'])
 
         for obj in bucket.objects.all():
-            try:
-                Path(os.path.dirname(obj.key)).mkdir(parents=True, exist_ok=True)
-            except FileExistsError:
-                pass
-            bucket.download_file(obj.key, os.path.join(CONF.MODELS_PATH, obj.key))
+            path, filename = os.path.split(obj.key)
+            if filename:  # prevents loop from downloading empty directories
+                print(f"Downloading {path, filename}")
+                Path(os.path.join(CONF.MODELS_PATH, path)).mkdir(parents=True, exist_ok=True)
+                bucket.download_file(obj.key, os.path.join(CONF.MODELS_PATH, path, filename))
 
     model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
     return model
