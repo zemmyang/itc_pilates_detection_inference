@@ -3,3 +3,4 @@ tensorflow-cpu
 numpy
 flask
 Pillow
+boto3
