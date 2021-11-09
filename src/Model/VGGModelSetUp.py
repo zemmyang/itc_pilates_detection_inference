@@ -1,6 +1,8 @@
 from tensorflow.keras.models import load_model
+import zipfile
 import os
-import boto3
+from pathlib import Path
+from glob import glob
 from Model import SettingsAndPaths as CONF
 
 
@@ -8,16 +10,19 @@ def model_reconstruct():
     if os.path.isfile(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS)):
         print("Loading model...")
     else:
-        print("Model not found, downloading from AWS...")
+        print("Model not found, unzipping from archives...")
+        zip_list = [Path(i) for i in glob(f'{CONF.MODELS_PATH}/21oct.h5.zip.*')]
 
-        s3r = boto3.resource('s3', aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-                             aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
-        bucket = s3r.Bucket(os.environ['S3_BUCKET_NAME'])
+        for zipName in zip_list:
+            with open(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "ab") as f, \
+                    open(os.path.join(CONF.MODELS_PATH, zipName), "rb") as z:
+                f.write(z.read())
 
-        for obj in bucket.objects.all():
-            if not os.path.exists(os.path.dirname(obj.key)):
-                os.makedirs(os.path.dirname(obj.key))
-            bucket.download_file(obj.key, os.path.join(CONF.MODELS_PATH, obj.key))
+        with zipfile.ZipFile(os.path.join(CONF.MODELS_PATH, "21oct.zip"), "r") as zipObj:
+            zipObj.extractall(os.path.join(CONF.MODELS_PATH, '21oct.h5'))
+
+        [os.remove(file)for file in zip_list]
+        os.remove(os.path.join(CONF.MODELS_PATH, "21oct.zip"))
 
     model = load_model(os.path.join(CONF.MODELS_PATH, CONF.MODEL_WEIGHTS))
     return model
