@@ -10,6 +10,7 @@ app = Flask(__name__,
             static_folder=CONST.STATIC_FOLDER)
 
 model = model_reconstruct()
+CONST.create_folders()
 
 
 @app.route('/')

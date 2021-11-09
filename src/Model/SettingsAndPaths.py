@@ -26,7 +26,9 @@ VIDEO_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), DATA_UP
 OUT_FRAMES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), OUT_FOLDER)
 MODELS_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), MODELS_DIRECTORY)
 
-Path(FRAMES_PATH).mkdir(parents=True, exist_ok=True)
-Path(VIDEO_FOLDER).mkdir(parents=True, exist_ok=True)
-Path(OUT_FRAMES_PATH).mkdir(parents=True, exist_ok=True)
-Path(MODELS_PATH).mkdir(parents=True, exist_ok=True)
+
+def create_folders():
+    Path(FRAMES_PATH).mkdir(parents=True, exist_ok=True)
+    Path(VIDEO_FOLDER).mkdir(parents=True, exist_ok=True)
+    Path(OUT_FRAMES_PATH).mkdir(parents=True, exist_ok=True)
+    Path(MODELS_PATH).mkdir(parents=True, exist_ok=True)
